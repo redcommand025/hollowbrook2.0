@@ -36,7 +36,7 @@
 
   function boot() {
     var g = G_(); if (!g || !g.register) return setTimeout(boot, 20);
-  (function (gofn, pick) { mod.getOptions = function (state) { var out = gofn.apply(this, arguments); if (out) ['actions', 'other', 'dialogue'].forEach(function (k) { (out[k] || []).forEach(function (o) { if (o && !o.section) o.section = pick(o, state); if (o && !o.icon) o.icon = '💼'; }); }); return out; }; })(mod.getOptions, function () { return 'shop'; });
+  (function (gofn, pick) { mod.getOptions = function (state) { var out = gofn.apply(this, arguments); if (out) ['actions', 'other', 'dialogue'].forEach(function (k) { (out[k] || []).forEach(function (o) { if (o && !o.section) o.section = pick(o, state); if (o && !o.icon) o.icon = '👜'; }); }); return out; }; })(mod.getOptions, function () { return 'shop'; });
     g.register(mod); hookLimit();
     if (g.on) g.on('start', function () { hookLimit(); });
     if (g.addTab) g.addTab({
