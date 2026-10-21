@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hollowbrook 2.0</title>
+<link rel="stylesheet" href="css/style.css?v=26.10.19.6">
+</head>
+<body>
+<div id="app">
+  <aside id="panel"></aside>
+  <main id="main">
+    <div id="banners" hidden></div>
+    <div id="story"></div>
+    <div id="notices"></div>
+    <div id="options"></div>
+  </main>
+</div>
+<div id="charmenu" hidden>
+  <div class="sheet">
+    <button id="charclose" aria-label="Close">×</button>
+    <nav id="chartabs"></nav>
+    <div id="charbody"></div>
+  </div>
+</div>
+<!-- engine first, then modules (order among modules does not matter) -->
+<script src="js/engine.js?v=26.10.19.6"></script>
+<script src="js/modules/world.js?v=26.10.19.6"></script>
+<script src="js/modules/stats.js?v=26.10.19.6"></script>
+<script src="js/modules/school.js?v=26.10.19.6"></script>
+<script src="js/modules/npcs.js?v=26.10.19.6"></script>
+<script src="js/modules/creation.js?v=26.10.19.6"></script>
+<script src="js/modules/doll.js?v=26.10.19.6"></script>
+<script src="js/modules/wardrobe.js?v=26.10.19.6"></script>
+<script src="js/modules/dorm.js?v=26.10.19.6"></script>
+<script src="js/modules/pets.js?v=26.10.19.6"></script>
+<script src="js/modules/extras.js?v=26.10.19.6"></script>
+<script src="js/modules/salon.js?v=26.10.19.6"></script>
+<script src="js/modules/inventory.js?v=26.10.19.6"></script>
+</body>
+</html>
