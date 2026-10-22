@@ -292,6 +292,7 @@
                  'It can\'t take any more. The plastic strains, then gives; hot urine floods the cuffs and soaks into your clothes.',
                  'Full to bursting. You feel the sudden give as the core overflows and wet heat spreads under the tapes.'
                ]) };
+      if (G && G.story) G.story('<p>' + pick(texts) + ' (' + pct + '% full)</p>');
       return false;
     }
     b.clean = false;
