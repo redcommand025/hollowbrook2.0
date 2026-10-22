@@ -1028,7 +1028,11 @@
       if (both) kinds.push('bowels');
       var said = [];
       var done = kinds.filter(function (k) { var ok = wardrobeAbsorb(k); if (ok) { n[k] = 0; if (lastBriefText) said.push(lastBriefText); } return ok; });
-      if (!done.length) return { text: '<p>Your brief is already full. You need a restroom, or a fresh brief.</p>', minutes: 1 };
+      if (!done.length) {
+  var w = WR && WR(), b = w && w.worn && w.worn.under_bottom, d = b && w.CATALOG && w.CATALOG[b];
+  var info = ' [ml=' + (b && b.ml || 0) + ' lb=' + (b && b.lb || 0) + ' cap=' + (d && d.absorb && d.absorb.ml || '?') + ']';
+  return { text: '<p>Your brief is already full. You need a restroom, or a fresh brief.' + info + '</p>', minutes: 1 };
+}
       var r = rec(s); r.briefUsed = (r.briefUsed || 0) + 1;
       n.stress = clamp(n.stress - 15, 0, MAX);
       if (G.emit) done.forEach(function (k) { G.emit('accident', { kind: k, type: k, where: here().id, witness: null, contained: true, absorbed: true, chosen: true, amount: VOLUME[k].amount, unit: VOLUME[k].unit }); });
