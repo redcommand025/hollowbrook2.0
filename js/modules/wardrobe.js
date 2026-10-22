@@ -961,4 +961,3 @@ var LAST = null;   // details of the last absorb() for the accident text
   if (window.G) window.G.wardrobe = window.Wardrobe;   // alias so either name works
   boot();
 })();
-Edit and Push Updates to Hollowbrook Repo - Grok
