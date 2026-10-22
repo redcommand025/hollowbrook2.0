@@ -457,11 +457,13 @@ pullup_small: { slot: 'under_bottom', name: 'Small pull-up', kind: 'under', colo
   return held >= amt ? true : held;
 }
   function briefFull() {
-    var b = wornItem('under_bottom'), d = def(b);
-    if (!b || !d || !d.absorb) return false;
-    var liq = effectiveCap(b, d, 'bladder');
-    return ((b.ml || 0) + BLADDER_ML > liq) || ((b.lb || 0) + POO_LB > d.absorb.lb);
-  }
+  var b = wornItem('under_bottom'), d = def(b);
+  if (!b || !d || !d.absorb) return false;
+  var liq = effectiveCap(b, d, 'bladder');
+  var full = ((b.ml || 0) + BLADDER_ML > liq) || ((b.lb || 0) + POO_LB > d.absorb.lb);
+  console.log('briefFull check:', { ml: b.ml, lb: b.lb, liq: liq, solidCap: d.absorb.lb, full: full, id: b.id });
+  return full;
+}
   function briefBulk() { var b = wornItem('under_bottom'), d = def(b); if (!b || !d || !d.absorb) return 0; var f = bfill(b), grow = (b.grew || f >= 0.35 ? 1 : 0) + (f >= 0.85 ? 1 : 0); if (d.cat === 'cloth') grow = Math.min(grow, 1); return Math.min(4, (d.bulk || 0) + grow); }
   function briefNoise() { var b = wornItem('under_bottom'), d = def(b); if (!b || !d || !d.absorb) return 0; return Math.min(4, (d.noise || 0) + (d.cat === 'plastic' && bfill(b) >= 0.5 ? 1 : 0)); }
   function briefWeight() { var b = wornItem('under_bottom'), d = def(b); if (!b || !d || !d.absorb) return 0; return Math.round(((b.ml || 0) / 453.6 + (b.lb || 0)) * 10) / 10; }
@@ -1059,4 +1061,4 @@ pullup_small: { slot: 'under_bottom', name: 'Small pull-up', kind: 'under', colo
   };
   if (window.G) window.G.wardrobe = window.Wardrobe;   // alias so either name works
   boot();
-  })();
+})();
