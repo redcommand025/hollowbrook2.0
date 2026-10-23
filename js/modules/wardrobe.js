@@ -458,13 +458,17 @@ pullup_small: { slot: 'under_bottom', name: 'Small pull-up', kind: 'under', colo
 }
   function briefFull() {
   var b = wornItem('under_bottom'), d = def(b);
+  var info = ' [worn=' + (b ? b.id : 'none') + ' hasAbsorb=' + !!(d && d.absorb) + ' ml=' + (b && b.ml || 0) + ' lb=' + (b && b.lb || 0);
+  if (d && d.absorb) info += ' liquidCap=' + d.absorb.ml + ' solidCap=' + d.absorb.lb;
+  info += ']';
+  if (G && G.appendStory) G.appendStory('<p>DEBUG briefFull:' + info + '</p>');
   if (!b || !d || !d.absorb) return false;
   var liq = effectiveCap(b, d, 'bladder');
   var full = ((b.ml || 0) + BLADDER_ML > liq) || ((b.lb || 0) + POO_LB > d.absorb.lb);
-  console.log('briefFull check:', { ml: b.ml, lb: b.lb, liq: liq, solidCap: d.absorb.lb, full: full, id: b.id });
+  if (G && G.appendStory) G.appendStory('<p>DEBUG result: liq=' + liq + ' full=' + full + '</p>');
   return full;
 }
-  function briefBulk() { var b = wornItem('under_bottom'), d = def(b); if (!b || !d || !d.absorb) return 0; var f = bfill(b), grow = (b.grew || f >= 0.35 ? 1 : 0) + (f >= 0.85 ? 1 : 0); if (d.cat === 'cloth') grow = Math.min(grow, 1); return Math.min(4, (d.bulk || 0) + grow); }
+function briefBulk() { var b = wornItem('under_bottom'), d = def(b); if (!b || !d || !d.absorb) return 0; var f = bfill(b), grow = (b.grew || f >= 0.35 ? 1 : 0) + (f >= 0.85 ? 1 : 0); if (d.cat === 'cloth') grow = Math.min(grow, 1); return Math.min(4, (d.bulk || 0) + grow); }
   function briefNoise() { var b = wornItem('under_bottom'), d = def(b); if (!b || !d || !d.absorb) return 0; return Math.min(4, (d.noise || 0) + (d.cat === 'plastic' && bfill(b) >= 0.5 ? 1 : 0)); }
   function briefWeight() { var b = wornItem('under_bottom'), d = def(b); if (!b || !d || !d.absorb) return 0; return Math.round(((b.ml || 0) / 453.6 + (b.lb || 0)) * 10) / 10; }
   function wearingBriefUsed() { var b = wornItem('under_bottom'); return !!(b && def(b).absorb && (b.ml || b.lb || b.soiled)); }
